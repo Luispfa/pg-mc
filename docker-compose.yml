@@ -1,0 +1,26 @@
+services:
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+            args:
+                TIMEZONE: ${TIMEZONE}
+        container_name: sf_php
+        volumes:
+            - .:/var/www/pgmc/
+        networks:
+            - symfony
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
+        container_name: sf_nginx
+        volumes:
+            - .:/var/www/pgmc/
+        ports:
+            - 80:80
+        networks:
+            - symfony
+
+networks:
+    symfony:
