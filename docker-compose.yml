@@ -10,17 +10,6 @@ services:
             - .:/var/www/pgmc/
         networks:
             - symfony
-    nginx:
-        build:
-            context: .
-            dockerfile: docker/nginx/Dockerfile
-        container_name: sf_nginx
-        volumes:
-            - .:/var/www/pgmc/
-        ports:
-            - 80:80
-        networks:
-            - symfony
 
 networks:
     symfony:
