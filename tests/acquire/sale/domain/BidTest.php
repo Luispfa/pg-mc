@@ -7,12 +7,11 @@ namespace App\Tests\acquire\sale\domain;
 use App\acquire\sale\domain\Bid;
 use PHPUnit\Framework\TestCase;
 
-final class BidTest extends TestCase
+class BidTest extends TestCase
 {
     public function testAddBid()
     {
-        $bid = new Bid('A');
-        $bid->addBid(100, 150);
+        $bid = Bid::create('A', 100, 150);
 
         $expectedBids = [100, 150];
         $actualBids = $bid->bids();
@@ -23,7 +22,7 @@ final class BidTest extends TestCase
 
     public function testNotAddBid()
     {
-        $bid = new Bid('B');
+        $bid = Bid::create('B');
 
         $expectedBids = [];
         $actualBids = $bid->bids();
@@ -34,8 +33,7 @@ final class BidTest extends TestCase
 
     public function testMaxBid(): void
     {
-        $bid = new Bid('C');
-        $bid->addBid(100, 150, 200);
+        $bid = Bid::create('C', 100, 150, 200);
 
         $expectedMaxBid = 200;
         $actualMaxBid = $bid->maxBid();
@@ -45,7 +43,7 @@ final class BidTest extends TestCase
 
     public function testMaxEmptyBid(): void
     {
-        $bid = new Bid('C');
+        $bid = Bid::create('C');
 
         $actualMaxBid = $bid->maxBid();
 

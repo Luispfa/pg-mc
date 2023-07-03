@@ -9,13 +9,23 @@ final class Bid
     /** var Bid[] */
     private array $bids = [];
 
-    public function __construct(public readonly string $buyer)
+    private function __construct(public readonly string $buyer)
     {
     }
 
-    public function addBid(int ...$amount): void
+    public static function create(string $buyer, ?int ...$bids): self
     {
-        $this->bids = $amount;
+        $bid = new self($buyer);
+        if ($bids) {
+            $bid->addBid(...$bids);
+        }
+
+        return $bid;
+    }
+
+    public function addBid(int ...$bids): void
+    {
+        $this->bids = $bids;
     }
 
     public function bids(): array
